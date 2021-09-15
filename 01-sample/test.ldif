@@ -1,0 +1,32 @@
+dn: dc=mycompany,dc=com
+dc: mycompany
+description: My wonderful company as much text as you want to place 
+ in this line up to 32K continuation data for the line above must 
+ have <CR> or <CR><LF> i.e. ENTER works 
+ on both Windows and *nix system - new line MUST begin with ONE SPACE
+objectClass: top
+objectClass: domain
+o: Example, Inc.
+
+dn: ou=people,dc=company,dc=com
+ou: people
+description: All people in organization
+objectClass: top
+objectClass: organizationalUnit
+
+dn: cn=Robert Smith,ou=people,dc=mycompany,dc=com
+objectclass: inetOrgPerson
+cn: Robert Smith
+cn: Robert J Smith
+cn: bob  smith
+sn: smith
+uid: rjsmith
+userpassword: rJsmitH
+carlicense: HISCAR 123
+homephone: 555-111-2222
+mail: r.smith@example.com
+mail: rsmith@example.com
+mail: bob.smith@example.com
+description: swell guy
+ou: Human Resources
+

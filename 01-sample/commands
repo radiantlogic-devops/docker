@@ -1,0 +1,5 @@
+create-hdapstore -namingcontext dc=mycompany,dc=com
+init-hdap-store -ldif /resources/test.ldif -namingcontext dc=mycompany,dc=com -interactive
+create-ldapproxy -datasourcename vds -namingcontext o=testproxy -remotebasedn dc=mycompany,dc=com
+create-pcache -namingcontext o=testproxy
+
