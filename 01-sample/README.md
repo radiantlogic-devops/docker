@@ -2,7 +2,7 @@
 Creating a sample docker image from a existing radiantone/fid image and running with custom commands.
 
 ## Prerequsites
-- Understand what are docker images[Read](https://www.tutorialspoint.com/docker/docker_images.htm)
+- Understand what are [docker images](https://www.tutorialspoint.com/docker/docker_images.htm)
 - How to build docker images from existing image
 
 ## Custom configuration on your custom fid image
@@ -15,14 +15,13 @@ Feel free to add custom logic to the commands file and please evaluate with Radi
 
 ## Building docker image
 ```
-# This command looks for Dockerfile in the current directory to build the image
 docker build . --tag <TAG_NAME>
 ```
 Example
 ```
 docker build . --tag fid
 ```
-## Setting up DockerHub repo (You can also use other free docker image repositories)
+## Setting up DockerHub repo (You can also use other image registries)
 - Signup at https://hub.docker.com/
 - Create a repository fid
 - Now you will be provided with commands to push to the repo
@@ -34,5 +33,3 @@ docker build . --tag fid
 docker tag fid username/fid
 docker push username/fid
 ```
-
-
