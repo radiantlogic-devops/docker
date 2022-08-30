@@ -1,15 +1,21 @@
 FROM arm64v8/eclipse-temurin:8u312-b07-jdk as jdk
 
-FROM radiantone/fid:7.3.21 as source
-RUN tar xf installer.tar.gz
-RUN rm -rf vds/jdk installer.tar.gz
+#FROM radiantone/fid:7.3.21 as source
+FROM radiantone/fid:7.4.2-rc2 as source
+
+RUN gunzip -q installer.tar.gz || exit 0
+RUN tar xvf installer.tar
+RUN rm -rf vds/jdk installer.tar
 RUN mkdir vds/jdk
 COPY --from=jdk /opt/java/openjdk vds/jdk
+RUN rm -rf vds/jdk/sample && rm -f vds/jdk/src.zip
 RUN tar -czf installer.tar.gz vds
 RUN rm -rf vds
 RUN mkdir vds
 
 FROM centos:centos7
+
+ENV FID_VERSION=7.4.2
 
 RUN yum -y update && \
     yum -y install unzip wget nc && \
@@ -23,12 +29,13 @@ RUN  useradd --uid 1000 --gid 0 -G 0 \
 
 USER radiantone
 
-RUN chmod -R g=u /opt/radiantone
+#RUN chmod -R g=u /opt/radiantone
 
 WORKDIR /opt/radiantone
 
 ENV PATH=/opt/radiantone/vds/bin:/opt/radiantone/vds/bin/advanced:$PATH
 ENV RLI_HOME=/opt/radiantone/vds
+ENV RLI_JAVA_HOME=/opt/radiantone/vds/jdk/jre
 ENV LIVENESS_CHECK="curl -m 1 -sf localhost:9100/ping"
 
 EXPOSE 2389 2636 7070 7171 8089 8090 9100 9101
