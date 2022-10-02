@@ -5,6 +5,10 @@ Create FID image with other base OS and run as radiantone:radiantone or 1000:100
 ## Build image with redhat/ubi8-minimal base image
 
 ```
+docker build -t radiantone/fid-ubi8-minimal:7.4.2 -f Dockerfile.ubi8-minimal .
+```
+** Using  buildx **
+```
 docker buildx build --platform=linux/amd64 -t radiantone/fid-ubi8-minimal:7.4.2 -f Dockerfile.ubi8-minimal .
 ```
 
