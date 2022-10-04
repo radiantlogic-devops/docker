@@ -25,7 +25,7 @@ FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}
 #      yum install -y hostname nc gzip && \
 #      yum clean all
 
-RUN microdnf install hostname nc gzip tar shadow-utils
+RUN microdnf -y install hostname nc gzip tar shadow-utils
 
 # Copy file from FID image
 COPY --from=base --chown=1000:1000 /opt/radiantone /opt/radiantone
