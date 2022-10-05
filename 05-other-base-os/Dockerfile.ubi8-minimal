@@ -14,16 +14,11 @@ FROM ${FID_REGISTRY}/${FID_IMAGE}:${FID_TAG} as base
 
 RUN chmod -R g=u /opt/radiantone
 
-
 ################################################################################
 # Build stage 1
 # Copy prepared files from the previous stage and complete the image.
 ################################################################################
 FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}
-
-#RUN yum update --setopt=tsflags=nodocs -y && \
-#      yum install -y hostname nc gzip && \
-#      yum clean all
 
 RUN microdnf -y install hostname nc gzip tar shadow-utils
 
@@ -39,11 +34,6 @@ RUN groupadd --gid 1000 radiantone && \
 USER radiantone
 
 RUN chmod -R g=u /opt/radiantone
-
-# Make the file run.sh executable
-#RUN chmod +x /opt/radiantone/run.sh && chmod +x /opt/radiantone/update.sh \
-#	&& chmod +x /opt/radiantone/install.sh && chmod +x /opt/radiantone/migrate.sh \
-#        && chmod +x /opt/radiantone/migrate-local.sh
 
 WORKDIR /opt/radiantone
 
