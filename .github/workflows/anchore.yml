@@ -34,7 +34,7 @@ jobs:
     - name: Check out the code
       uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile.ubi8-minimal --tag pgodey/fid-ubi8-minimal:${{ github.sha }}
+      run: docker build . --file 05-other-base-os/Dockerfile.ubi8-minimal --tag pgodey/fid-ubi8-minimal:${{ github.sha }}
     - name: Run the Anchore Grype scan action
       uses: anchore/scan-action@d5aa5b6cb9414b0c7771438046ff5bcfa2854ed7
       id: scan
