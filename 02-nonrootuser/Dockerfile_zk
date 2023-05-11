@@ -2,7 +2,7 @@ FROM radiantone/zookeeper:3.5.8
 
 # Provide a non-root user to run the process.
 RUN groupadd --gid 1000 radiantone && \
-    useradd --uid 1000 --gid 1000 -G 0 \
+    useradd --uid 1000 --gid 1000 \
       --home-dir /opt/radiantone --no-create-home \
       radiantone
 
