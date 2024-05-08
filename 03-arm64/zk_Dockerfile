@@ -1,22 +1,25 @@
-FROM arm64v8/eclipse-temurin:8u312-b07-jdk as jdk
+FROM arm64v8/eclipse-temurin:8u402-b06-jdk-centos7 AS jdk
+
 
 FROM radiantone/zookeeper:3.5.8 as source
 RUN tar xf zookeeper.tar.gz
 RUN rli-zookeeper-external/jdk/bin/java -version
 RUN rm -rf zookeeper.tar.gz rli-zookeeper-external/jdk
 RUN mkdir rli-zookeeper-external/jdk
+
 COPY --from=jdk /opt/java/openjdk rli-zookeeper-external/jdk
+
 RUN tar -czf zookeeper.tar.gz rli-zookeeper-external
 RUN rm -rf rli-zookeeper-external
 
-FROM centos:centos7
+FROM --platform=linux/arm64/v8 amazonlinux:2
 
 ENV PATH="/opt/radiantone/rli-zookeeper-external/zookeeper/bin:/opt/radiantone/rli-zookeeper-external/jdk/bin:${PATH}"
 ENV ZK_DIR=rli-zookeeper-external
 
-RUN \
-    yum -y update && \
-    yum -y install bind-utils    
+RUN yum update --setopt=tsflags=nodocs -y && \
+      yum install -y hostname nc gzip shadow-utils tar bind-utils && \
+      yum clean all
 
 WORKDIR /opt/radiantone
 
